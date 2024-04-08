@@ -4,10 +4,11 @@
 #define CCOMMANDLINEPARSER_OPTIONS_MANAGER_H
 
 #include <algorithm>
+#include <cstring>
 #include <vector>
 #include <iostream>
 #include <sstream>
-#include <sec_api/string_s.h>
+// #include <sec_api/string_s.h>
 
 using namespace std;
 
@@ -219,8 +220,7 @@ namespace cclip
 
         const size_t length = buf.str().length() + 1;
         const auto help_str = new char[length];
-        strcpy_s(help_str, length, buf.str().c_str());
-
+        strcpy(help_str, buf.str().c_str());
         return help_str;
     }
 
