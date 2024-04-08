@@ -69,6 +69,17 @@ namespace ScheduledGitCommit
         int run_command(const std::string &command, std::string &output) const;
 
         /**
+         * @brief Parses and modifies the message string.
+         *
+         * This method parses the message and replaces placeholders with dynamic values. The placeholders are:
+         *   - "%t": Replaced with the current date and time in the format "YYYY-MM-DD HH:MM:SS".
+         *   - "%d": Replaced with the current date in the format "YYYY-MM-DD".
+         *
+         * @return The modified message string.
+         */
+        [[nodiscard]] std::string parse_message() const;
+
+        /**
          * @brief The directory path where the Git repository is located.
          *
          * This variable stores the directory path where the Git repository is located. It is used by the `GitManager` class to execute Git commands in the specified directory.
