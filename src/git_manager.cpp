@@ -13,7 +13,7 @@ namespace ScheduledGitCommit
 {
     bool GitManager::has_changes() const
     {
-        if (std::string output; run_command("git ", output) == 0)
+        if (std::string output; run_command("git diff --name-only", output) == 0)
         {
             std::cout << output << std::endl;
             return !output.empty();
@@ -32,14 +32,14 @@ namespace ScheduledGitCommit
     void GitManager::commit() const
     {
         std::string output;
-        run_command("git commit -m \"" + message + "\"", output);
+        run_command("git commit -m \"" + parse_message() + "\"", output);
         std::cout << output << std::endl;
     }
 
     void GitManager::create_tag() const
     {
         std::string output;
-        run_command("git tag -a \"" + message + "\" -m \"" + message + "\"", output);
+        run_command("git tag -a \"" + parse_message() + "\" -m \"" + parse_message() + "\"", output);
         std::cout << output << std::endl;
     }
 
@@ -104,6 +104,7 @@ namespace ScheduledGitCommit
 
     void GitManager::run() const
     {
+        printf("Scheduled Git Commit is starting.\n");
         // create a new thread
         std::thread([this]()
         {
@@ -115,6 +116,7 @@ namespace ScheduledGitCommit
                 {
                     if (has_changes())
                     {
+                        printf("Creating a new commit.\n");
                         add_all();
                         commit();
                         if (this->should_create_tag)
@@ -125,6 +127,9 @@ namespace ScheduledGitCommit
                         {
                             push();
                         }
+                    } else
+                    {
+                        printf("No changes to commit.\n");
                     }
                 } catch (std::exception &e)
                 {
@@ -132,6 +137,6 @@ namespace ScheduledGitCommit
                     break;
                 }
             }
-        });
+        }).join();
     }
 } // ScheduledGitCommit
