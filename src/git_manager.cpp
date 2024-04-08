@@ -16,7 +16,8 @@ namespace ScheduledGitCommit
         if (std::string output; run_command("git diff --name-only", output) == 0)
         {
             std::cout << output << std::endl;
-            return !output.empty();
+            const std::string stage_output = stage_all();
+            return !output.empty() || !stage_output.empty();
         }
 
         return false;
@@ -25,7 +26,7 @@ namespace ScheduledGitCommit
     void GitManager::add_all() const
     {
         std::string output;
-        run_command("git add .", output);
+        run_command("git add . -v", output);
         std::cout << output << std::endl;
     }
 
@@ -48,6 +49,14 @@ namespace ScheduledGitCommit
         std::string output;
         run_command("git push --force", output);
         std::cout << output << std::endl;
+    }
+
+    std::string GitManager::stage_all() const
+    {
+        std::string output;
+        run_command("git stage * -v", output);
+        std::cout << output << std::endl;
+        return output;
     }
 
     int GitManager::run_command(const std::string &command, std::string &output) const
