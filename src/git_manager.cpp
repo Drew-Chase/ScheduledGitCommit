@@ -114,6 +114,9 @@ namespace ScheduledGitCommit
     {
         printf("Scheduled Git Commit is starting.\n");
         // create a new thread
+        // this thread will run the commit process
+        // Separating the commit process from the main thread will allow the main thread to continue running
+        // meaning the main thread can still recieve input from the user
         std::thread([this]()
         {
             const std::chrono::milliseconds duration(this->time);
@@ -145,6 +148,6 @@ namespace ScheduledGitCommit
                     break;
                 }
             }
-        }).join();
+        }).join(); // wait for the thread to finish
     }
 } // ScheduledGitCommit
