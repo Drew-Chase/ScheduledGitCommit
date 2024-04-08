@@ -63,6 +63,6 @@ auto main(const int argc, char **argv) -> int
 
     directory = std::filesystem::absolute(directory).string(); // Converts directory to absolute path
 
-    ScheduledGitCommit::GitManager git(time, message, directory, create_tag, push);
+    const ScheduledGitCommit::GitManager git(time, message, directory, create_tag, push);
     git.run();
 }
