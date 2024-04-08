@@ -9,7 +9,11 @@
 
 namespace ScheduledGitCommit
 {
-    class GitManager
+ /**
+  * @class GitManager
+  * @brief The GitManager class provides functionality to manage Git repositories.
+  */
+ class GitManager
     {
         /**
          * @brief Checks if there are any changes in the Git repository.
@@ -55,6 +59,15 @@ namespace ScheduledGitCommit
          * @return None.
          */
         void push() const;
+
+        /**
+         * @brief Stages all changes in the Git repository.
+         *
+         * This method stages all changes in the Git repository by running the "git stage * -v" command. It stages all modified and new files, but does not stage deleted files. The verbose option is enabled to display the list of staged files.
+         *
+         * @return The output of the "git stage * -v" command as a string.
+         */
+        [[nodiscard]] std::string stage_all() const;
 
         /**
          * @brief Execute a command and capture the output.
