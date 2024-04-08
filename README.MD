@@ -41,7 +41,7 @@ git push -u origin master
 To run the tool, run the following command in your terminal:
 
 ```bash
-./scheduled-git-commit
+./sgc-Linux-x86_64 
 ```
 
 # Usage
@@ -70,5 +70,5 @@ To stop the tool, press `Ctrl + C`.
 ## Example
 
 ```bash
-./scheduled-git-commit --time 1m --message "Commit %t" --directory /path/to/directory --tag --push
+./sgc-Linux-x86_64  --time 1m --message "Commit %t" --directory /path/to/directory --tag --push
 ```
