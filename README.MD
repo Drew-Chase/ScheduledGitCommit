@@ -24,6 +24,8 @@ If you want to push your commits to a remote repository, you can set the remote 
 git remote add origin <remote-repository-url>
 ```
 
+> Make sure your signed in to your github account (or other git account) before running this command.
+
 ## Create a initial commit
 
 To create an initial commit, run the following commands in your terminal:
