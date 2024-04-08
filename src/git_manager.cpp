@@ -80,7 +80,11 @@ namespace ScheduledGitCommit
         std::string msg = message;
         const auto now = std::chrono::system_clock::now();
         const auto time = std::chrono::system_clock::to_time_t(now);
+#if defined(_WIN32)
+        const auto [tm_sec, tm_min, tm_hour, tm_mday, tm_mon, tm_year, tm_wday, tm_yday, tm_isdst] = *std::localtime(&time);
+#else
         const auto [tm_sec, tm_min, tm_hour, tm_mday, tm_mon, tm_year, tm_wday, tm_yday, tm_isdst, tm_gmtoff,tm_zone] = *std::localtime(&time);
+#endif
         const std::string time_str = std::to_string(tm_hour) + ":" + std::to_string(tm_min) + ":" + std::to_string(tm_sec);
         const std::string date_str = std::to_string(tm_year + 1900) + "-" + std::to_string(tm_mon + 1) + "-" + std::to_string(tm_mday);
         const std::string datetime_str = date_str + " " + time_str;
