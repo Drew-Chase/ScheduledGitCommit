@@ -4,7 +4,8 @@ project(ScheduledGitCommit)
 set(CMAKE_CXX_STANDARD 17)
 
 add_executable(ScheduledGitCommit main.cpp
-        src/git_manager.cpp)
+        src/git_manager.cpp
+        includes/options_manager.hpp)
 
 # Add the include directory
 target_include_directories(ScheduledGitCommit PRIVATE include)
@@ -22,6 +23,8 @@ set_target_properties(ScheduledGitCommit PROPERTIES PDB_OUTPUT_DIRECTORY "${CMAK
 set_target_properties(ScheduledGitCommit PROPERTIES INTERMEDIATE_DIRECTORY "${CMAKE_SOURCE_DIR}/bin/obj")
 # Set the debug executable name to "line-scanner-debug"
 set_target_properties(ScheduledGitCommit PROPERTIES DEBUG_POSTFIX "-debug")
+
+
 
 # Set the cmake debug directory to bin/obj/cmake/debug
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG "${CMAKE_SOURCE_DIR}/bin/obj/cmake/debug")
